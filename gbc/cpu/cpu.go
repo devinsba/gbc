@@ -24,11 +24,12 @@ func InitGameboyCpu(bootRom []byte, gameRom []byte) *GameboyCpu {
 
 func (cpu *GameboyCpu) Run() {
 	for {
-		logger().Debugf("PC %x INST %x", cpu.getPC(), cpu.rom[cpu.getPC()])
+		logger().Debugf("PC %x", cpu.getPC())
+		logger().Debugf("INST %x", cpu.rom[cpu.getPC()])
 		inst := instructionSet[cpu.rom[cpu.getPC()]]
 		cpu.setPC(inst.method(*cpu, inst))
 		//cpu.pc = exec(cpu.rom, cpu.pc)
-		time.Sleep(1000 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond)
 	}
 }
 

@@ -53,7 +53,7 @@ func xor(cpu GameboyCpu, inst instruction) uint16 {
 func loadAToAddress(cpu GameboyCpu, inst instruction) uint16 {
 	switch inst.opcode {
 	case 0x02:
-		addr := cpu.getBC()
+		addr := cpu.getBC() + 0xFF00
 		logger().Debugf("Setting mem %x to A [%x]", addr, cpu.getA())
 		cpu.rom[addr] = cpu.getA()
 	}
@@ -70,13 +70,17 @@ func loadAToHighRam(cpu GameboyCpu, inst instruction) uint16 {
 }
 
 func loadImmediateTo16BitReg(cpu GameboyCpu, inst instruction) uint16 {
+	addressLow := cpu.rom[cpu.getPC() + 1]
+	addressHigh := cpu.rom[cpu.getPC() + 2]
+	newVal := binary.LittleEndian.Uint16([]byte{addressLow, addressHigh})
 	switch inst.opcode {
+	case 0x01:
+		cpu.setBC(newVal)
+		break
 	case 0x31:
-		addressLow := cpu.rom[cpu.getPC() + 1]
-		addressHigh := cpu.rom[cpu.getPC() + 2]
-		newSp := binary.LittleEndian.Uint16([]byte{addressLow, addressHigh})
-		logger().Debugf("SP to become 0x%x", newSp)
-		cpu.setSP(newSp)
+		logger().Debugf("SP to become 0x%x", newVal)
+		cpu.setSP(newVal)
+		break
 	}
 	return cpu.getPC() + inst.instructionSize
 }
@@ -86,5 +90,28 @@ func loadValueIntoA(cpu GameboyCpu, inst instruction) uint16 {
 	case 0x3E:
 		cpu.setA(cpu.rom[cpu.getPC() + 1])
 	}
+	return cpu.getPC() + inst.instructionSize
+}
+
+func disableInterupts(cpu GameboyCpu, inst instruction) uint16 {
+	// TODO interupts
+	return cpu.getPC() + inst.instructionSize
+}
+
+func rotateRightCarryA(cpu GameboyCpu, inst instruction) uint16 {
+	a := cpu.getA()
+	bit0 := a & 1 == 1
+	a = a >> 1
+	cpu.setA(a)
+	if a == 0 {
+		cpu.setFlagZ(true)
+	} else {
+		// TODO maybe?
+		//cpu.setFlagZ(false)
+	}
+	cpu.setFlagN(false)
+	cpu.setFlagH(false)
+	cpu.setFlagC(bit0)
+
 	return cpu.getPC() + inst.instructionSize
 }

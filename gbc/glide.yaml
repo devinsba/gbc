@@ -1,6 +1,0 @@
-package: github.com/devinsba/gbc/gbc
-import:
-- package: github.com/devinsba/gba
-  subpackages:
-  - gbc/cpu
-- package: github.com/ventu-io/slf
