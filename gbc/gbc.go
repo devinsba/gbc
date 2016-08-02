@@ -3,8 +3,9 @@ package gbc
 import (
 	"github.com/ventu-io/slf"
 	"time"
-	"github.com/devinsba/gba/gbc/cpu"
+	"github.com/devinsba/gbc/gbc/cpu"
 )
+
 func logger() slf.StructuredLogger {
 	return slf.WithContext("gbc")
 }
