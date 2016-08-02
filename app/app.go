@@ -4,7 +4,7 @@ import (
 	"github.com/ventu-io/slog"
 	"github.com/ventu-io/slog/basic"
 	"github.com/ventu-io/slf"
-	"github.com/devinsba/gbc/gbc"
+	"github.com/devinsba/gbc-go/gbc"
 	"io/ioutil"
 )
 
