@@ -10,7 +10,7 @@ type instruction struct {
 type InstructionMethod func(GameboyCpu, instruction) uint16
 
 var instructionSet map[byte] instruction = map[byte] instruction {
-	0x00: instruction{0x00, 1, 1, nop},
+	0x00: instruction{0x00, 1, 4, nop},
 	0x01: instruction{0x01, 3, 12, loadImmediateTo16BitReg},
 	0x02: instruction{0x02, 2, 8, loadAToAddress},
 	0x0F: instruction{0x0F, 1, 1, rotateRightCarryA},
