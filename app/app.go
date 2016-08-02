@@ -1,17 +1,17 @@
 package main
 
 import (
+	"io/ioutil"
+
+	"github.com/devinsba/gbc-go/gbc"
+	"github.com/ventu-io/slf"
 	"github.com/ventu-io/slog"
 	"github.com/ventu-io/slog/basic"
-	"github.com/ventu-io/slf"
-	"github.com/devinsba/gbc-go/gbc"
-	"io/ioutil"
 )
 
 func main() {
 	appender := basic.New()
 	appender.SetTemplate(basic.StandardTermTemplate)
-
 
 	logger := slog.New()
 	logger.SetLevel(slf.LevelDebug)
