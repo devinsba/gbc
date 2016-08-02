@@ -1,0 +1,9 @@
+package: github.com/devinsba/gbc/app
+import:
+- package: github.com/devinsba/gbc
+  subpackages:
+  - gbc
+- package: github.com/ventu-io/slf
+- package: github.com/ventu-io/slog
+  subpackages:
+  - basic
