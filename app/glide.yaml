@@ -1,6 +1,6 @@
-package: github.com/devinsba/gbc/app
+package: github.com/devinsba/gbc-go/app
 import:
-- package: github.com/devinsba/gbc
+- package: github.com/devinsba/gbc-go
   subpackages:
   - gbc
 - package: github.com/ventu-io/slf
