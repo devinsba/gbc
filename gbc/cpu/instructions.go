@@ -115,3 +115,19 @@ func rotateRightCarryA(cpu GameboyCpu, inst instruction) uint16 {
 
 	return cpu.getPC() + inst.instructionSize
 }
+
+/*
+Section 3.3.1 part 1
+ */
+func ld_nn_n(cpu GameboyCpu, inst instruction) uint16 {
+	logger().Error("NOT IMPLEMENTED")
+	return cpu.getPC() + inst.instructionSize
+}
+
+/*
+Section 3.3.1 part 2
+ */
+func ld_r1_r2(cpu GameboyCpu, inst instruction) uint16 {
+	logger().Error("NOT IMPLEMENTED")
+	return cpu.getPC() + inst.instructionSize
+}
